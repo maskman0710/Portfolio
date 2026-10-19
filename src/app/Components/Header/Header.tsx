@@ -1,42 +1,128 @@
-import Link from "next/link";
 
+"use client";
+
+import Link from "next/link";
+import { useState } from "react";
+
+const navLinks = [
+  { name: "Home", href: "#home" },
+  { name: "About", href: "#about" },
+  { name: "Journey", href: "#journey" },
+  { name: "Projects", href: "#projects" },
+  { name: "Skills", href: "#skills" },
+  { name: "Contact", href: "#contact" },
+];
 
 export default function Header() {
-    return(
-        <div className="h-screen bg-amber-100">
-            <main className="w-full h-full">
-                <nav className="w-full border h-10 border-b border-b-amber-300 shadow-2xl flex justify-between">
-                    <div className="py-2 text-8 px-2">
-                        <h3 className="text-black px-2">Rishi Goyal</h3  >
-                    </div>
-                    <div className="text-black text-xs py-2.5 ">
-                        <Link href="" className="px-2">Home</Link>
-                        <Link href="" className="px-2">About</Link>
-                        <Link href="" className="px-2">Journey</Link>
-                        <Link href="" className="px-2">Projects</Link>
-                        <Link href="" className="px-2">Skills</Link>
-                        <Link href="" className="px-2">Contact</Link>
-                   </div>
-                    <div className="text-xs px-3 py-1.5 flex">
-                        <button className="text-white bg-green-950 rounded-3xl h-full px-3 hover:bg-green-100 hover:text-black">Let's Connect ↗</button>
-                    </div>
-                </nav>
-                 <div className="h-1/12 w-1/2 px-2 py-3">
-                 <div className="p-1 w-1/3 h-7 ">
-                    <ul className="list-disc list-inside bg-linear-to-r from-orange-900 to-yellow-500 w-full h-full py-0.5 px-2 rounded-2xl">
-                        <li className="text-black bold text-xs">Mern Stack Developer</li>
-                    </ul></div>
-                    
-                </div>
-                <div className="border border-red-500 h-1/2 flex justify-between">
-                    <div className="h-full w-1/2 border-2 border-green-500 ">
-                        <h1 className="text-black">Building Ideas into Products</h1>
-                    </div>
-                    <div className="h-full w-1/2 border-2 border-purple-400">
+  const [menuOpen, setMenuOpen] = useState(false);
 
-                    </div>
-                </div>
-            </main>
+  return (
+    <nav className="fixed left-0 top-0 z-50 w-full border-b border-amber-300 bg-[#eeeade] shadow-md">
+      <div className="flex h-16 items-center justify-between px-5 sm:px-8 lg:px-12">
+        {/* Logo / Name */}
+        <Link
+          href="#home"
+          onClick={() => setMenuOpen(false)}
+          className="text-lg font-bold text-green-950"
+        >
+          Rishi Goyal<span className="text-green-700">.</span>
+        </Link>
+
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-6 md:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.name}
+              href={link.href}
+              className="text-sm font-medium text-gray-800 transition hover:text-green-800"
+            >
+              {link.name}
+            </Link>
+          ))}
         </div>
-    )
+
+        {/* Desktop Connect Button */}
+        <a
+          href="#contact"
+          className="hidden rounded-full bg-green-950 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-green-800 md:inline-flex"
+        >
+          Let&apos;s Connect ↗
+        </a>
+
+        {/* Mobile Hamburger Button */}
+        <button
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          className="flex h-10 w-10 items-center justify-center rounded-lg text-green-950 transition hover:bg-green-950/10 md:hidden"
+        >
+          {menuOpen ? (
+            
+            /* Close icon */
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6 6l12 12M18 6L6 18"
+              />
+            </svg>
+          ) : (
+            /* Hamburger icon */
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              className="h-6 w-6"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4 7h16M4 12h16M4 17h16"
+              />
+            </svg>
+          )}
+        </button>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {menuOpen && (
+        <div
+          id="mobile-menu"
+          className="border-t border-amber-300 bg-[#eeeade] px-5 pb-5 pt-3 shadow-lg md:hidden"
+        >
+          <div className="flex flex-col gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-lg px-3 py-3 text-sm font-medium text-gray-800 transition hover:bg-green-950/10 hover:text-green-900"
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            <a
+              href="#contact"
+              onClick={() => setMenuOpen(false)}
+              className="mt-2 rounded-lg bg-green-950 px-4 py-3 text-center text-sm font-medium text-white transition hover:bg-green-800"
+            >
+              Let&apos;s Connect ↗
+            </a>
+          </div>
+        </div>
+      )}
+    </nav>
+  );
 }
