@@ -9,7 +9,7 @@ export default function Main() {
   return (
     <section
       id="home"
-      className="min-h-screen scroll-mt-16 bg-[#f8f7f4] px-5 pb-12 pt-24 sm:px-8 md:px-12 lg:px-16"
+      className="min-h-screen scroll-mt-16 bg-linear-to-l from-[#f1ebd6] to-[#f8f7f4] px-5 pb-5 pt-24 sm:px-8 md:px-12 lg:px-16"
     >
       {/* Developer badge */}
       <div className="mb-8">
@@ -33,7 +33,7 @@ export default function Main() {
             </span>
           </h1>
 
-          <p className="mt-6 max-w-xl leading-7 text-gray-600 sm:text-base">
+          <p className="mt-6 max-w-xl leading-7 text-gray-600 sm:text-base ">
             Hi, I’m Rishi, a full-stack developer who builds with the MERN
             stack. I enjoy turning ideas into complete, working products,
             from the database and API to a clean, responsive frontend.
@@ -142,5 +142,6 @@ export default function Main() {
 
       </div>
     </section>
+    
   );
 }
