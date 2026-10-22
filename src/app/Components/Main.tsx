@@ -128,7 +128,7 @@ export default function Main() {
 
         {/* Right: Profile image */}
         <div className="flex w-full justify-center md:w-1/2 md:justify-end">
-          <div className="relative aspect-[4/5] w-64 overflow-hidden rounded-[100px] border-4 border-white shadow-xl sm:w-72 md:w-full md:max-w-[340px] lg:max-w-[390px]">
+          <div className="relative aspect-4/5 w-64 overflow-hidden rounded-[100px] border-4 border-white shadow-xl sm:w-72 md:w-full md:max-w-85 lg:max-w-97.5">
             <Image
               src={profile}
               alt="Rishi Goyal - MERN Stack Developer"
